@@ -1,6 +1,7 @@
 import re
 from io import BytesIO
 import os
+import platform  # <--- ADDED IMPORT
 
 import pdfplumber
 from docx import Document
@@ -8,9 +9,9 @@ import pytesseract
 from PIL import Image
 
 # --- TESSERACT CONFIGURATION ---
-# Point pytesseract to the default Windows installation path.
-# If you installed Tesseract somewhere else, update this path.
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# If on Windows, set the path. If on Linux (Docker), it finds it automatically.
+if platform.system() == "Windows":
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Regexes for contact extraction
 EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")

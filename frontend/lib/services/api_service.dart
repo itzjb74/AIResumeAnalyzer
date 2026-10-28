@@ -1,23 +1,17 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart'; // Required for kIsWeb
 
 class ApiService {
-  // Automatically switch the URL based on the platform
-  static String get baseUrl {
-    if (kIsWeb) {
-      // If running on Chrome or Web
-      return 'http://127.0.0.1:8000';
-    } else {
-      // If running on Android Emulator
-      // Note: If you use a physical phone, replace this with your computer's Wi-Fi IP (e.g., 'http://192.168.1.5:8000')
-      return 'http://10.0.2.2:8000';
-    }
-  }
+  // Live Render Backend URL
+  static const String baseUrl =
+      'https://airesumeanalyzer-backend-bxxv.onrender.com';
 
   final Dio _dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
-      connectTimeout: const Duration(seconds: 30),
+      // Increased to 60 seconds to allow Render's free tier to wake up from sleep
+      connectTimeout: const Duration(seconds: 60),
       receiveTimeout: const Duration(seconds: 60),
     ),
   );
@@ -38,7 +32,9 @@ class ApiService {
     } on DioException catch (e) {
       // If the server is down, give a clearer error message
       if (e.type == DioExceptionType.connectionError) {
-        throw Exception('Could not connect to the server. Is FastAPI running?');
+        throw Exception(
+          'Could not connect to the server. Please try again in a minute.',
+        );
       }
       throw Exception(e.response?.data['detail'] ?? e.message);
     } catch (e) {

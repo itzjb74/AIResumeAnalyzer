@@ -1,5 +1,7 @@
 # 🤖 AI Resume Analyzer
 
+**🔴 [Live Demo](https://airesumeanalyzer-frontend.vercel.app)** *(Note: The free backend server goes to sleep after 15 mins of inactivity. The first request may take 45-60 seconds to wake up).*
+
 A full-stack, AI-powered application that analyzes resumes against job descriptions. Built with **Flutter** (Frontend), **FastAPI** (Backend), and **Groq LLM** (AI Feedback). 
 
 It calculates an ATS score, matches skills, extracts contact info, uses OCR to read scanned PDFs, and generates highly specific, actionable feedback to help candidates land their dream job.
@@ -30,7 +32,12 @@ It calculates an ATS score, matches skills, extracts contact info, uses OCR to r
 - `scikit-learn` (NLP & TF-IDF similarity)
 - `groq` (LLM integration for AI suggestions)
 
-## 🚀 Getting Started
+**Cloud & DevOps**
+- **Docker:** For containerizing the backend with Linux dependencies (Tesseract & Poppler).
+- **Render:** Hosting the live FastAPI backend.
+- **Vercel:** Hosting the live Flutter Web frontend.
+
+## 🚀 Getting Started (Local Development)
 
 ### 1. Backend Setup (FastAPI)
 
